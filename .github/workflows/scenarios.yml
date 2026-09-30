@@ -56,3 +56,15 @@ jobs:
         run: |
           node tools/web-build.js
           node tools/verify-bake.js
+
+      # The same promise, end to end against the real Supabase project: the build,
+      # the plain link, the FRIENDS panel, and a second machine on the same
+      # channel (it rebuilds the folder itself from the same pair of secrets).
+      # It skips - cleanly, with its own message - when they are not configured
+      # (a fork), so a pull request still turns green. scenarios/live.js.
+      - name: the plain link, on the real project
+        env:
+          ISLE_SUPABASE_URL: ${{ secrets.ISLE_SUPABASE_URL }}
+          ISLE_SUPABASE_KEY: ${{ secrets.ISLE_SUPABASE_KEY }}
+          BROWSER_PATH: /usr/bin/google-chrome
+        run: node cdp-test.js live

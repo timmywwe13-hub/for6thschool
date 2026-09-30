@@ -23,8 +23,17 @@ module.exports = async function deployed(ctx) {
 
   const root = path.resolve(__dirname, '..');
 
-  /* ---------- build the folder that gets deployed ---------- */
-  const build = execFileSync('node', [path.join(root, 'tools', 'web-build.js')], { encoding: 'utf8' });
+  /* ---------- build the folder that gets deployed ----------
+     Deliberately without the environment's project: this scenario drives its own
+     local relay through `?relay=`, and a page with a real lobby baked in would
+     start dialling it instead of the machine this scenario is watching. The
+     real project is checked end to end by scenarios/live.js, which asks for it
+     on purpose. */
+  const build = execFileSync('node', [path.join(root, 'tools', 'web-build.js')], {
+    encoding: 'utf8',
+    env: Object.assign({}, process.env,
+      { ISLE_SUPABASE_URL: '', ISLE_SUPABASE_KEY: '' })
+  });
   const web = path.join(root, 'web');
   const hasIndex = fs.existsSync(path.join(web, 'index.html'));
   const indexBytes = hasIndex ? fs.statSync(path.join(web, 'index.html')).size : 0;

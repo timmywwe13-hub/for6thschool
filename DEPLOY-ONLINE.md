@@ -232,6 +232,19 @@ channel sees none of it. It ends with the one-line address to paste, and the bui
 command. A wrong key, a paused project, Realtime switched off - each is a failed
 check with the reason, instead of a lobby that quietly does nothing.
 
+The same, for the whole shipped game rather than just the protocol - the build, the
+plain link, the FRIENDS panel, and a second machine joining the same channel:
+
+```bash
+ISLE_SUPABASE_URL=https://<project-ref>.supabase.co \
+ISLE_SUPABASE_KEY=sb_publishable_... node cdp-test.js live
+```
+
+That is `scenarios/live.js`. This repository's CI runs it after every push when the
+repository secrets exist, and skips it - with a message of its own, still green -
+when they do not, so a pull request from a fork is never waiting on anybody's
+Supabase account.
+
 ### What this is under the game
 
 Realtime is a Phoenix channel server in front of a pub/sub, and the game speaks its
@@ -578,6 +591,9 @@ node cdp-test.js deployed               # file host + relay on another port
 node cdp-test.js friendreq              # requests, notifications, staying online
 node cdp-test.js friendsnet             # two devices through the real relay
 node cdp-test.js supanet                # two devices through a Supabase channel
+node cdp-test.js live                   # the plain link on the REAL project
+                                         #   (needs ISLE_SUPABASE_URL / _KEY in the
+                                         #    environment; skips without them)
 ```
 
 Then: drag `web/` onto <https://app.netlify.com/drop>, drop `deno-relay.zip` into

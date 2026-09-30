@@ -11,7 +11,7 @@
     "deno-check": "node tools/relay-deno-check.js",
     "supa-check": "node tools/supa-check.js",
     "test": "node cdp-test.js boot",
-    "scenarios": "node cdp-test.js teams && node cdp-test.js friendreq && node cdp-test.js friendsnet && node cdp-test.js supanet && node cdp-test.js lobby && node cdp-test.js online && node cdp-test.js deployed && node cdp-test.js netperf"
+    "scenarios": "node cdp-test.js teams && node cdp-test.js friendreq && node cdp-test.js friendsnet && node cdp-test.js supanet && node cdp-test.js lobby && node cdp-test.js online && node cdp-test.js deployed && node cdp-test.js netperf && node cdp-test.js live"
   },
   "engines": {
     "node": ">=22"
