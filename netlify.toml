@@ -1,0 +1,39 @@
+# The whole online system, from the deploy side, in this file.
+#
+#   1. Supabase > New project > Project settings > API keys  -> two values,
+#      and they never go anywhere near git: put them in Netlify as
+#      ISLE_SUPABASE_URL  (the Project URL, https://<something>.supabase.co)
+#      ISLE_SUPABASE_KEY  (the publishable/anon key)
+#   2. Netlify > Add new site > Import an existing project > this GitHub repo.
+#      Build command and publish directory below are already written here, so
+#      there is nothing to type but the two variables above.
+#
+# Every push to main then builds ./web with the Supabase project baked in and
+# deploys it. A laptop opens the plain link and is online; nobody pastes
+# anything, anywhere, ever again.
+#
+# The free tier covers a school and a family with room to spare: 200 realtime
+# connections, 100 messages a second, a megabyte a message - the game sends a
+# handful of small packets a second per device.
+
+[build]
+  command = "node tools/web-build.js"
+  publish = "web"
+
+  [build.environment]
+    # the same version the repository asks for (package.json engines) - web-build.js
+    # uses nothing exotic, but a named version means the build is the same everywhere
+    NODE_VERSION = "22"
+
+# The one file that changes on every build is index.html (it carries the baked
+# Supabase project), so nothing on this site may be cached for longer than it
+# takes to rebuild - otherwise a pushed fix takes an hour to reach players.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"

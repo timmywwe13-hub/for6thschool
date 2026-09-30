@@ -1,0 +1,42 @@
+# What a repository does not need.
+#
+# Everything NOT listed here is part of the game and its validation harness - and
+# on GitHub Pages, everything not listed here is what gets published. So the list
+# is short on purpose: nothing the browser loads is ever in it.
+#
+# See DEPLOY-ONLINE.md for the hosting story and README.md for the layout.
+
+# dependencies (fbx2gltf, used by tools/fbx-*.js; the game itself has none)
+node_modules/
+
+# the generated deploy folder (tools/web-build.js makes it on demand), and the
+# zip of the Deno relay, which is a build product of relay-deno.js
+web/
+deno-relay.zip
+
+# probe logs and one-shot run output
+*.log
+*.err
+*.out
+*.pid
+
+# the previous index kept while the prefix patch landed - not part of the game
+index.html.bak-prefix
+
+# source art the bake tools read. The game ships the *baked* results, so these
+# are development material, not assets: chest_model.js, the .glb.js sidecars and
+# the skin .glb files are what index.html actually asks for.
+*.fbx
+animated_old_chest.glb
+cod-ghost-src/
+Treasure_chest_(tier_1)-*.png
+call-of-duty-ghost.zip
+
+# editors, operating systems, and host scratch directories
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+.vercel/
+.netlify/

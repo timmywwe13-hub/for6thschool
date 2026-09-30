@@ -1,0 +1,7 @@
+STUCK at: 
+  (anon)  line 12121:31
+logs: []
+  [T] heightmap 123 ms
+  [T] relax 129 ms, verts 829
+  [T] bridges 29 in 173 ms total, colliders 415
+  [T] world built in 248 ms

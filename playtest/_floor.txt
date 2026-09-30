@@ -1,0 +1,6 @@
+PASS  probe ran on all three quality presets
+--- scenario output ---
+  log:   floor probe: {"had":0,"maps":{"low":{"segs":96,"step":10.42,"samples":322,"worstBil":3.96,"worstA":7.12,"worstB":0,"meshAboveBilinear":11,"meshBelowBilinear":14,"at":{"x":89.1,"z":-151.6,"mesh":8.81,"bil":4.85}},"med":{"segs":128,"step":7.81,"samples":332,"worstBil":1.44,"worstA":2.918,"worstB":0,"meshAboveBilinear":10,"meshBelowBilinear":4,"at":{"x":136.8,"z":-81.9,"mesh":3.76,"bil":2.32}},"high":{"segs":160,"step":6.25,"samples":318,"worstBil":-0.28,"worstA":0.498,"worstB":0,"meshAboveBilinear":6,"meshBelowBilinear":4,"at":{"x":332.6,"z":79.4,"mesh":2.7,"bil":2.98}}}}
+--- page errors ---
+  (clean)
+--- summary: 1/1 checks passed; 0 page error(s) ---

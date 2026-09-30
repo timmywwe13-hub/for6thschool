@@ -1,0 +1,19 @@
+{
+  "name": "isle-royale",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A browser battle royale in one folder: no build step, no dependencies. index.html is the game; lobby-server.js is the lobby that serves it and relays the websockets.",
+  "scripts": {
+    "start": "node lobby-server.js",
+    "lobby": "node lobby-server.js",
+    "online": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/play-online.ps1",
+    "web": "node tools/web-build.js",
+    "deno-check": "node tools/relay-deno-check.js",
+    "supa-check": "node tools/supa-check.js",
+    "test": "node cdp-test.js boot",
+    "scenarios": "node cdp-test.js teams && node cdp-test.js friendreq && node cdp-test.js friendsnet && node cdp-test.js supanet && node cdp-test.js lobby && node cdp-test.js online && node cdp-test.js deployed && node cdp-test.js netperf"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

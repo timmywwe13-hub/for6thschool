@@ -1,0 +1,52 @@
+{
+ "started": "2026-09-27T03:34:37.144Z",
+ "lanes": 2,
+ "done": 4,
+ "total": 4,
+ "cases": [
+  {
+   "name": "boot",
+   "state": "done",
+   "pass": 29,
+   "checks": 29,
+   "problems": 0,
+   "names": [],
+   "error": "",
+   "killed": false,
+   "ms": 12283
+  },
+  {
+   "name": "menu",
+   "state": "done",
+   "pass": 25,
+   "checks": 25,
+   "problems": 0,
+   "names": [],
+   "error": "",
+   "killed": false,
+   "ms": 11182
+  },
+  {
+   "name": "chests",
+   "state": "done",
+   "pass": 10,
+   "checks": 10,
+   "problems": 0,
+   "names": [],
+   "error": "",
+   "killed": false,
+   "ms": 18227
+  },
+  {
+   "name": "surffloor",
+   "state": "done",
+   "pass": 6,
+   "checks": 6,
+   "problems": 0,
+   "names": [],
+   "error": "",
+   "killed": false,
+   "ms": 24555
+  }
+ ]
+}

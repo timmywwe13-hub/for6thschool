@@ -1,0 +1,58 @@
+name: scenarios
+
+# The project's own rule: every system is asserted by a scenario that drives the
+# shipped code in a real browser (see FRIENDS-NET.md and DEPLOY-ONLINE.md). This
+# runs the lobby-facing ones - the quick, deterministic subset - on every push, so
+# a change to the friends panel, the relay or the transport cannot land unnoticed.
+#
+# The harness needs a Chrome/Chromium and nothing else: no dependencies to
+# install, no build. It finds the runner's Google Chrome through BROWSER_PATH
+# (cdp-lib.js also looks in the usual places on Windows, macOS and Linux).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  scenarios:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: the browser the harness drives
+        run: google-chrome --version
+
+      - name: scenarios
+        env:
+          BROWSER_PATH: /usr/bin/google-chrome
+        run: |
+          set -e
+          for s in boot teams friendreq friendsnet supanet lobby online deployed netperf; do
+            echo "::group::$s"
+            node cdp-test.js "$s"
+            echo "::endgroup::"
+          done
+
+      # The protocol check for the Supabase transport, which needs no account:
+      # tools/supa-check.js starts a Realtime server of its own and speaks to it.
+      - name: supabase lobby check
+        run: node tools/supa-check.js
+
+      # The promise this repo makes: push to GitHub, Netlify builds ./web with the
+      # Supabase project baked in, and a laptop opens the plain link and is online.
+      # Netlify does the real build with its own environment variables; this runs
+      # the same recipe with the repository's secrets, so a push can never ship a
+      # build with no lobby in it. On forks, where secrets do not exist, it only
+      # checks the recipe (tools/verify-bake.js says which of the two it did).
+      - name: bake the deploy folder (Supabase, from the repository secrets)
+        env:
+          ISLE_SUPABASE_URL: ${{ secrets.ISLE_SUPABASE_URL }}
+          ISLE_SUPABASE_KEY: ${{ secrets.ISLE_SUPABASE_KEY }}
+        run: |
+          node tools/web-build.js
+          node tools/verify-bake.js

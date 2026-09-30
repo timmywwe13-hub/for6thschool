@@ -1,0 +1,30 @@
+# Render blueprint for the lobby - and, because the lobby is also the game's web
+# server, for the whole game.
+#
+# One service gives everybody ONE link:
+#
+#     https://<name>.onrender.com/        the game
+#     wss://<name>.onrender.com/isle      the room it dials on load (automatic)
+#
+# In Render:  New +  ->  Blueprint  ->  pick this repository  ->  Apply.
+# It reads this file, so there is no framework or start command to choose, and
+# every push to the branch redeploys. Nothing else has to be hosted: no static
+# site, no second service, no build.
+#
+# Free plan notes: the instance sleeps after ~15 minutes with nobody connected,
+# so the first visitor waits ~30-60 s while it wakes. The game notices - it says
+# RELAY - RECONNECTING and keeps dialling - so nobody has to press anything.
+# A paid instance, or a keep-alive ping against /relay.json every few minutes,
+# removes that wait.
+services:
+  - type: web
+    name: isle-royale-lobby
+    runtime: node
+    plan: free
+    autoDeploy: true
+    buildCommand: "echo the game is static files and the lobby has no dependencies - nothing to build"
+    startCommand: "node lobby-server.js"
+    healthCheckPath: /relay.json
+    envVars:
+      - key: NODE_VERSION
+        value: "22"

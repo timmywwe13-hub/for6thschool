@@ -1,0 +1,31 @@
+PASS  three.js loaded from CDN
+PASS  no module failed to declare
+PASS  boot loading overlay hidden
+PASS  no WebGL error screen
+PASS  WebGL renderer created
+PASS  state is MENU
+PASS  canvas has a backing size
+PASS  100+ bot names exist
+PASS  6+ weapons defined
+PASS  6+ zone phases defined
+PASS  bot count >= 40
+PASS  start button visible on title screen
+PASS  match started in DROP state
+PASS  100 combatants
+PASS  bots spawned
+PASS  player is alive and high up
+PASS  HUD shown
+PASS  loot spawned
+PASS  world has colliders
+PASS  3+ named towns
+PASS  4+ landmarks
+PASS  150+ trees
+PASS  zone initialised
+PASS  renderer is drawing
+--- scenario output ---
+  warn: [character] no locomotion clips (cannot load freddy_anims.js) - the player keeps the procedural walk cycle. Generate freddy_anims.js with node tools/fbx-bake.js.
+  log: 
+  match snapshot: {"state":"DROP","total":100,"alive":100,"bots":99,"botsAlive":99,"playerAlive":true,"playerY":324.4,"glider":false,"lootApi":"init,ensureMesh,spawn,remove,count,nearestWeapon,consume,shapeFor,info,pickWeapon,rollItem,place,populate,dropFrom,update,initCrates,spawnCrate,updateCrates,crates,aimedItem,take,clear","crateCount":0,"lootItems":409,"colliders":879,"worldColliders":879,"towns":3,"landmarks":4,"trees":260,"hudVisible":true,"zoneR":470,"zPhase":0,"sceneChildren":33,"drawCalls":46,"triangles":240468}
+--- page errors ---
+  (clean)
+--- summary: 24/24 checks passed; 0 page error(s) ---

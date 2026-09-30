@@ -1,0 +1,154 @@
+ISLE ROYALE - HOW TO PLAY
+=========================
+
+This whole folder is the game. Copy it anywhere - a stick, a desktop, a laptop -
+and it still works. Nothing to install to PLAY.
+
+
+PLAY ALONE
+----------
+Double-click  index.html.
+
+The battle bus, the bots, the chests, the storm, every mode: all of it works
+with no server, no internet and no setup. Your friends list, your skin and your
+name are remembered by the browser on this machine.
+
+
+AT SCHOOL, ON A CHROMEBOOK   (nothing to install, nothing to copy)
+------------------------------------------------------------------
+Somebody (a friend, or you at home) puts it online once, and then everybody just
+opens a link - no files, no terminal, no downloads:
+
+  1. Open the link that was sent (it looks like
+         https://something.netlify.app/
+     or that address with ?room=isle&relay=... on the end).
+  2. In the game: SETTINGS -> PLAYER NAME. Pick a name. Keep it different from
+     everybody else's.
+  3. That is it. Everyone who opens the link is in the same lobby, ADD FRIEND
+     sends a real request, and COPY INVITE LINK passes the same door on.
+  4. Press LOBBY (in the game, top of the menu) and you can SEE everybody who is
+     online: each person standing there in the character and skin they picked,
+     with their name over their head, walking about. That is the same list of
+     people FRIENDS shows you, only you are looking at them.
+
+If the page sits on "RELAY - RECONNECTING" for half a minute the first time, that
+is the lobby waking up (free hosts sleep). It dials by itself; wait and it drops
+you in.
+
+If ADD FRIEND answers "NOT SENT (NO LOBBY)", then the page has no lobby behind it
+yet: a host that only serves files (Netlify, Pages, GitHub Pages) cannot hold the
+socket a lobby needs, so the name is kept and the request goes out by itself the
+moment there is one. The steps just below are the fix - five minutes, once.
+
+HOW THE HOST PUTS IT ONLINE (once, in a browser - the only commands are git)
+----------------------------------------------------------------------------
+  THE PATH THIS PROJECT USES - three services and one push, then it is done:
+
+   1. Supabase (the lobby):  https://supabase.com/dashboard -> New project ->
+        Project settings -> API keys. Copy the two values:
+            Project URL         https://<something>.supabase.co
+            publishable key     sb_publishable_...   (older: the anon key)
+        No SQL, no tables, nothing to switch on. To try one first:
+            node tools/supa-check.js <Project URL> <key>
+   2. GitHub (the code):  in this folder,
+            git init -b main
+            git add -A && git commit -m "Isle Royale"
+            git remote add origin https://github.com/<you>/<repo>.git
+            git push -u origin main
+        Nothing secret goes with it.
+   3. Netlify (the host):  https://app.netlify.com -> Add new site ->
+        Import an existing project -> pick the repository. It reads
+        netlify.toml, so the build command and the folder are already written
+        down - there is no form to fill in.
+   4. Netlify -> Site configuration -> Environment variables, twice:
+            ISLE_SUPABASE_URL = the Project URL
+            ISLE_SUPABASE_KEY = the publishable key
+        These are the only secret in the whole setup, and they are not in git.
+   5. Deploy. The plain link is now the lobby: everybody who opens it is in,
+        with nothing to paste on any phone or Chromebook. Every later push
+        redeploys it, after the tests in .github/workflows/scenarios.yml.
+
+  WITHOUT GITHUB (all in a browser):
+   * the game:   node tools/web-build.js   then drag the new  web  folder onto
+                 https://app.netlify.com/drop   (no account needed)
+   * the lobby:  make a free project at https://supabase.com/dashboard, then in
+                 the game on that link:
+                     FRIENDS -> ONLINE -> first box: the Project URL,
+                                          second box: the key
+                                      -> GO ONLINE
+                 It keeps them, so that machine never does it again.
+   * OR a relay of your own:  sign in at https://console.deno.com , open
+                 Applications, press New Playground (NOT "+ New App" - that one
+                 wants a GitHub repo), drop  deno-relay.zip  into the file
+                 browser, then Deploy. In the game:
+                     FRIENDS -> ANOTHER LOBBY -> paste
+                         wss://<the deno address>/isle  -> CONNECT RELAY
+                 -> COPY INVITE LINK     <- that is the link to send everybody
+
+DEPLOY-ONLINE.md has the same thing with the details, plus a one-double-click
+option for a PC on the same wifi: PLAY-TOGETHER.cmd.
+
+
+PLAY WITH FRIENDS ON THE SAME WIFI   (no internet needed)
+--------------------------------------------------------
+1. ONE person double-clicks  PLAY-TOGETHER.cmd
+   (that person needs Node.js once: https://nodejs.org/)
+2. The black window that opens prints an address like
+
+       on your LAN   http://192.168.1.24:8787/?room=isle
+
+3. EVERYBODY ELSE just opens that address in a browser - Chrome, Edge, Firefox,
+   a phone, anything. Take the address with the ?room= on the end.
+4. Each device picks its own name: SETTINGS -> PLAYER NAME. Two players with
+   the same name cannot see each other, so make them different.
+
+
+PLAY WITH FRIENDS ANYWHERE   (internet)
+---------------------------------------
+Whoever hosts:
+1. Start the lobby:  PLAY-TOGETHER.cmd   (macOS/Linux:  node lobby-server.js)
+2. Put that lobby on the internet - either
+      cloudflared tunnel --url http://localhost:8787     (a tunnel from this PC), or
+      a small free host such as Render: DEPLOY-ONLINE.md has the steps
+3. In the game press FRIENDS -> COPY INVITE LINK and send that however you like
+   (Discord, WhatsApp, email). Opening it drops your friend straight into your
+   lobby - no typing, no settings.
+
+
+I GOT A LINK OR AN ADDRESS FROM SOMEBODY
+----------------------------------------
+In the game: FRIENDS -> paste it into the box under
+
+       ANOTHER LOBBY - LOCAL WIFI, OR AN ADDRESS SOMEBODY SENT
+
+which says
+
+       ws://192.168.1.24:8787/isle, an invite link, or a supabase: line
+
+and press CONNECT RELAY. That box takes any of these:
+
+       https://.../22/?room=isle&relay=wss%3A%2F%2F...      the invite link itself
+       wss://your-relay.onrender.com/isle                   a relay address
+       192.168.1.24:8787                                    a bare address
+       http://192.168.1.24:8787/?room=isle                  the lobby's own link
+       supabase:https://<project>.supabase.co|<key>         a Supabase project
+
+The lobby's own link is also the address PLAY-TOGETHER.cmd prints when it starts.
+
+If what somebody sent you is a Supabase project (a URL and a key), put them in
+the two ONLINE boxes at the top of the panel instead and press GO ONLINE - it
+keeps them, so it is the only time that machine asks.
+
+
+WHAT IS IN THIS FOLDER
+----------------------
+index.html ................. the game (double-click it)
+PLAY-TOGETHER.cmd .......... starts a lobby on this PC
+lobby-server.js ............ the lobby itself (no dependencies; node lobby-server.js)
+HOW-TO-PLAY.txt ............ this file
+README.md .................. the project, and what each file is
+FRIENDS-NET.md ............. how the friends panel and the lobby protocol work
+DEPLOY-ONLINE.md ........... putting the game online, step by step
+*.glb / *.glb.js ........... the character models
+vendor/ .................... the three.js glTF loader
+tools/ scenarios/ playtest/  development material - not needed to play

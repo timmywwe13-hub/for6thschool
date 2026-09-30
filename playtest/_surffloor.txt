@@ -1,0 +1,12 @@
+PASS  the ground query agrees with the drawn terrain (all presets)
+PASS  a bilinear query would NOT have: the two surfaces really do diverge
+PASS  the player really slides down the hill (high preset)
+PASS  his feet never drop through the visible floor (high preset)
+PASS  the player really slides down the hill (low preset)
+PASS  his feet never drop through the visible floor (low preset)
+--- scenario output ---
+  log:   mesh vs ground query: {"low":{"samples":408,"worst":0,"worstBilinear":1.85,"at":{"x":134.6,"z":-76.8}},"med":{"samples":390,"worst":0,"worstBilinear":-1.72,"at":{"x":109.1,"z":51}},"high":{"samples":410,"worst":0,"worstBilinear":0.41,"at":{"x":52.1,"z":-273.1}}}
+  log:   hill slide: {"high":{"slope":4.21,"drop":11.7,"travelled":11.9,"frames":240,"worstSink":-0.019,"framesUnder":0,"at":{"x":169,"z":-258}},"low":{"slope":3.79,"drop":7.8,"travelled":11.3,"frames":240,"worstSink":-0.014,"framesUnder":0,"at":{"x":169,"z":-258}}}
+--- page errors ---
+  (clean)
+--- summary: 6/6 checks passed; 0 page error(s) ---

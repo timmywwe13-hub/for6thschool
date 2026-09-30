@@ -1,0 +1,9 @@
+FULL PLAYTEST - 2026-09-27T03:34:37.145Z
+4 scenarios, 2 lane(s)
+
+PASS  boot            29/29 checks
+PASS  menu            25/25 checks
+PASS  chests          10/10 checks
+PASS  surffloor       6/6 checks
+
+verdict: all green

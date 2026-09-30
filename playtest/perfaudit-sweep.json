@@ -1,0 +1,99 @@
+{
+ "pois": [
+  {
+   "name": "FROSTPINE",
+   "at": [
+    176,
+    -522
+   ],
+   "state": "PLAYING",
+   "ground": 16.67,
+   "updP50": 2,
+   "updP95": 33.4,
+   "updMax": 33.4,
+   "renP50": 5.1,
+   "renP95": 36.9,
+   "renMax": 36.9,
+   "calls": 82,
+   "tris": 1520892,
+   "heapMB": 45.2,
+   "alive": 100
+  },
+  {
+   "name": "ICEBOUND KEEP",
+   "at": [
+    312,
+    -444
+   ],
+   "state": "PLAYING",
+   "ground": 16.53,
+   "updP50": 5.8,
+   "updP95": 56.5,
+   "updMax": 56.5,
+   "renP50": 6.9,
+   "renP95": 29.4,
+   "renMax": 29.4,
+   "calls": 82,
+   "tris": 1520892,
+   "heapMB": 45.2,
+   "alive": 100
+  },
+  {
+   "name": "RATTLESNAKE RAVINE",
+   "at": [
+    -148,
+    -362
+   ],
+   "state": "PLAYING",
+   "ground": 21.88,
+   "updP50": 4,
+   "updP95": 70.8,
+   "updMax": 70.8,
+   "renP50": 12.8,
+   "renP95": 186.3,
+   "renMax": 186.3,
+   "calls": 82,
+   "tris": 1520892,
+   "heapMB": 45.2,
+   "alive": 100
+  },
+  {
+   "name": "SUNSTONE FLATS",
+   "at": [
+    -363,
+    -225
+   ],
+   "state": "PLAYING",
+   "ground": 8.61,
+   "updP50": 2.4,
+   "updP95": 11.9,
+   "updMax": 11.9,
+   "renP50": 4.5,
+   "renP95": 32.6,
+   "renMax": 32.6,
+   "calls": 82,
+   "tris": 1520892,
+   "heapMB": 45.2,
+   "alive": 100
+  },
+  {
+   "name": "LAKESIDE LODGE",
+   "at": [
+    67,
+    -144
+   ],
+   "state": "PLAYING",
+   "ground": 12.37,
+   "updP50": 4.3,
+   "updP95": 17.4,
+   "updMax": 17.4,
+   "renP50": 7.6,
+   "renP95": 29.9,
+   "renMax": 29.9,
+   "calls": 82,
+   "tris": 1520892,
+   "heapMB": 45.2,
+   "alive": 100
+  }
+ ]
+}
